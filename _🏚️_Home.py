@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 import pandas as pd
-
+from streamlit_gsheets import GSheetsConnection
 
 #page config
 st.set_page_config(
@@ -9,29 +9,42 @@ st.set_page_config(
     page_icon="8️⃣"
 )
 
+# Create a connection object to gsheets
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+df = conn.read(
+    worksheet="Houses",
+    ttl=0
+)
 
 #start page render
 #st.image("images/All/dolf_racing_banner.png")
 st.title("D8 House Pricing Calculator")
 
-bot_value = 450000
-top_value = 4000000
+try:
+    for index, row in df.iterrows():
+        if st.checkbox(row['Location']):
+            bot_price = int(row['Bot Price'])
+            top_price = int(row['Top Price'])
 
-if st.checkbox("Enable big dick mode"):
-    bot_value = 0
-    top_value = 100000000
+    bot_value = bot_price 
+    top_value = top_price
 
-baseprice = st.slider("Select a price range",bot_value,top_value,(bot_value,top_value))
+    st.title("Price Range:")
+    st.header("Bottom Price: " + '${:,.0f}'.format(bot_value))
+    st.header("Top Price: " + '${:,.0f}'.format(top_value))
+    baseprice = st.slider("Narrow the price",bot_value,top_value,(bot_value,top_value))
 
-price = random.randint(baseprice[0],baseprice[1])
+    if st.button("Generate price: "):
+        price = random.randint(baseprice[0],baseprice[1])
+        st.header('${:,.0f}'.format(price))
+
+except:
+    st.header("Select a location")
 
 
-st.write()
 
-price_list = {'Price':["Base","With pool","+5%"],'Amount':['${:,.0f}'.format(price),'${:,.0f}'.format(price+100000),'${:,.0f}'.format(price*1.05)]}
 
-price_df = pd.DataFrame(data=price_list)
 
-st.dataframe(price_df,hide_index=True)
 
 
