@@ -28,35 +28,35 @@ for index, row in df.iterrows():
         bot_price = int(row['Bot Price'])
         top_price = int(row['Top Price'])
 
-bot_value = bot_price 
-top_value = top_price
+        bot_value = bot_price 
+        top_value = top_price
 
-st.title("Price Range:")
-st.header("Bottom Price: " + '${:,.0f}'.format(bot_value))
-st.header("Top Price: " + '${:,.0f}'.format(top_value))
-baseprice = st.slider("Narrow the price",bot_value,top_value,(bot_value,top_value))
+        st.title("Price Range:")
+        st.header("Bottom Price: " + '${:,.0f}'.format(bot_value))
+        st.header("Top Price: " + '${:,.0f}'.format(top_value))
+        baseprice = st.slider("Narrow the price",bot_value,top_value,(bot_value,top_value))
 
-if st.button("Generate random price: "):
-    price = random.randint(baseprice[0],baseprice[1])
-    st.header('${:,.0f}'.format(price))
+        if st.button("Generate random price: "):
+            price = random.randint(baseprice[0],baseprice[1])
+            st.header('${:,.0f}'.format(price))
 
-    with st.form("my_form"):   
-        st.write('Complete this form is you would like to save this appraisal.')
-        address = st.text_input('Address:')
-        quote = st.text_input('Quote: ',placeholder=price)
-        cus_name = st.text_input('Customer Name: ')
-        cus_sid = st.text_input('Customer SID: ')
-        cus_phone = st.text_input('Customer Phone#:')
-        realtor = st.text_input('Realtor:')
-        date = st.date_input('Quoted Date:')
-        submitted = st.form_submit_button("Submit")
+            with st.form("my_form"):   
+                st.write('Complete this form is you would like to save this appraisal.')
+                address = st.text_input('Address:')
+                quote = st.text_input('Quote: ',placeholder=price)
+                cus_name = st.text_input('Customer Name: ')
+                cus_sid = st.text_input('Customer SID: ')
+                cus_phone = st.text_input('Customer Phone#:')
+                realtor = st.text_input('Realtor:')
+                date = st.date_input('Quoted Date:')
+                submitted = st.form_submit_button("Submit")
 
-        if submitted:
-            appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date":date})
-            conn.update(worksheet="Appraisals", data=appraisal)
-            st.write("Submitted!")
-            sleep(10)
-            
+                if submitted:
+                    appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date":date})
+                    conn.update(worksheet="Appraisals", data=appraisal)
+                    st.write("Submitted!")
+                    sleep(10)
+                
 
 
 
