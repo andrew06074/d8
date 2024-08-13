@@ -39,7 +39,7 @@ try:
         price = random.randint(baseprice[0],baseprice[1])
         st.header('${:,.0f}'.format(price))
 
-    with st.form:   
+    with st.form("my_form"):   
         st.write('Complete this form is you would like to save this appraisal.')
         address = st.text_input('Address: ')
         quote = st.text_input('Quote: ',placeholder=price)
@@ -56,10 +56,8 @@ try:
             st.write("Submitted! ")
 
 
-
 except:
-    st.header("Select a location")
-
+    st.header("")
 
 
 
