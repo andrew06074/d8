@@ -41,7 +41,7 @@ try:
 
     with st.form("my_form"):   
         st.write('Complete this form is you would like to save this appraisal.')
-        address = st.text_input('Address: ')
+        address = st.text_input('Address:')
         quote = st.text_input('Quote: ',placeholder=price)
         cus_name = st.text_input('Customer Name: ')
         cus_sid = st.text_input('Customer SID: ')
