@@ -48,7 +48,7 @@ try:
         cus_phone = st.text_input('Customer Phone#:')
         realtor = st.text_input('Realtor:')
         date = st.date_input('Quoted Date: ')
-
+        st.stop()
         df = pd.DataFrame({"Home Address":address,"Price":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
         df.to_csv('Appraisals.csv', mode='a', index=False, header=True)
 
