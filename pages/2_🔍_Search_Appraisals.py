@@ -17,4 +17,4 @@ all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
 
 
 st.title('Search past appraisals')
-st.dataframe(all_appraisals)
+st.dataframe(all_appraisals,hide_index=True)
