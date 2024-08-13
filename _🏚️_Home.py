@@ -39,21 +39,21 @@ try:
         price = random.randint(baseprice[0],baseprice[1])
         st.header('${:,.0f}'.format(price))
 
-    with st.form("my_form"):   
-        st.write('Complete this form is you would like to save this appraisal.')
-        address = st.text_input('Address:')
-        quote = st.text_input('Quote: ',placeholder=price)
-        cus_name = st.text_input('Customer Name: ')
-        cus_sid = st.text_input('Customer SID: ')
-        cus_phone = st.text_input('Customer Phone#:')
-        realtor = st.text_input('Realtor:')
-        date = st.date_input('Quoted Date:')
+        with st.form("my_form"):   
+            st.write('Complete this form is you would like to save this appraisal.')
+            address = st.text_input('Address:')
+            quote = st.text_input('Quote: ',placeholder=price)
+            cus_name = st.text_input('Customer Name: ')
+            cus_sid = st.text_input('Customer SID: ')
+            cus_phone = st.text_input('Customer Phone#:')
+            realtor = st.text_input('Realtor:')
+            date = st.date_input('Quoted Date:')
 
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            df = pd.DataFrame({"Home Address":address,"Price":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
-            df.to_csv('Appraisals.csv', mode='a', index=False, header=True)
-            st.write("Submitted! ")
+            submitted = st.form_submit_button("Submit")
+            if submitted:
+                df = pd.DataFrame({"Home Address":address,"Price":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
+                df.to_csv('Appraisals.csv', mode='a', index=False, header=True)
+                st.write("Submitted! ")
 
 
 except:
