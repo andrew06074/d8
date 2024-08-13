@@ -26,7 +26,7 @@ submitted = form.form_submit_button("Submit")
 
 if submitted:
     st.write("Submitted!")
-    appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date of appraisal":date})
+    appraisal = pd.DataFrame({"Address":[address],"Price":[quote],"Customer":[cus_name],"SID":[cus_sid],"Phone":[cus_phone],"Realtor":[realtor],"Date of appraisal":[date]})
     sleep(10)
     conn.update(worksheet="Appraisals", data=appraisal)
     st.write("Submitted!")
