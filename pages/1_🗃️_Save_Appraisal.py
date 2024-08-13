@@ -25,8 +25,11 @@ date = form.date_input('Quoted Date:')
 submitted = form.form_submit_button("Submit")
 
 if submitted:
-    all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
-    appraisal = pd.DataFrame({"Address":[address],"Price":[quote],"Customer":[cus_name],"SID":[cus_sid],"Phone":[cus_phone],"Realtor":[realtor],"Date of appraisal":[date]})
-    new_appraisals = pd.concat([all_appraisals,appraisal])
-    conn.update(worksheet="Appraisals", data=new_appraisals)
-    st.write("Submitted!")
+    if address is None or quote is None or cus_name is None or cus_sid is None or realtor is None or date is None:
+        st.write("Field Missing")
+    else:
+        all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
+        appraisal = pd.DataFrame({"Address":[address],"Price":[quote],"Customer":[cus_name],"SID":[cus_sid],"Phone":[cus_phone],"Realtor":[realtor],"Date of appraisal":[date]})
+        new_appraisals = pd.concat([all_appraisals,appraisal])
+        conn.update(worksheet="Appraisals", data=new_appraisals)
+        st.write("Submitted!")
