@@ -50,9 +50,9 @@ try:
             realtor = st.text_input('Realtor:')
             date = st.date_input('Quoted Date:')
             submitted = st.form_submit_button("Submit")
-            df = pd.DataFrame({"Home Address":address,"Price of home":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
 
             if submitted:
+                df = pd.DataFrame({"Home Address":address,"Price of home":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
                 conn.update(worksheet="Appraisals", data=df)
                 st.write("Submitted!")
                 sleep(10)
