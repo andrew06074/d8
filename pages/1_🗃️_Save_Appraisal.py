@@ -27,15 +27,15 @@ submitted = form.form_submit_button("Submit")
 if submitted:
     if address == "":
         st.write("Field Missing")
-    elif quote == "":
+    if quote == "":
         st.write("Field Missing")
-    elif cus_name == "":
+    if cus_name == "":
         st.write("Field Missing")
-    elif cus_sid == "":
+    if cus_sid == "":
         st.write("Field Missing")
-    elif realtor == "":
+    if realtor == "":
         st.write("Field Missing")
-    elif date == "":
+    if date == "":
         st.write("Field Missing")
     else:
         all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
