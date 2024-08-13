@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
+from time import sleep
 
 #page config
 st.set_page_config(
@@ -52,8 +53,10 @@ try:
             submitted = st.form_submit_button("Submit")
             if submitted:
                 df = pd.DataFrame({"Home Address":address,"Price":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
-                appraisal = conn.update(worksheet="Appraisals", data=df)
+                conn.update(worksheet="Appraisals", data=df)
                 st.write("Submitted! ")
+                sleep(10)
+                
 
 
 except:
