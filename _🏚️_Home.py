@@ -39,6 +39,20 @@ try:
         price = random.randint(baseprice[0],baseprice[1])
         st.header('${:,.0f}'.format(price))
 
+    st.write('Save this price to the catalog')
+    address = st.text_input('Address: ')
+    quote = st.text_input('Quote: ',placeholder=price)
+    cus_name = st.text_input('Customer Name: ')
+    cus_sid = st.text_input('Customer SID: ')
+    cus_phone = st.text_input('Customer Phone#:')
+    realtor = st.text_input('Realtor:')
+    date = st.date_input('Quoted Date: ')
+
+    df = pd.DataFrame({"Home Address":address,"Price":quote,"Customer":cus_name,"Customer SID":cus_sid,"Customer Phone#":cus_phone,"Realtor":realtor,"Date of appraisal":date})
+    df.to_csv('Appraisals.csv', mode='a', index=False, header=True)
+
+
+
 except:
     st.header("Select a location")
 
