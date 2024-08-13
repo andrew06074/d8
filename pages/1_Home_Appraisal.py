@@ -25,7 +25,8 @@ date = form.date_input('Quoted Date:')
 submitted = form.form_submit_button("Submit")
 
 if submitted:
-    st.write("Submitted!")
+    all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
     appraisal = pd.DataFrame({"Address":[address],"Price":[quote],"Customer":[cus_name],"SID":[cus_sid],"Phone":[cus_phone],"Realtor":[realtor],"Date of appraisal":[date]})
-    conn.update(worksheet="Appraisals", data=appraisal)
+    new_appraisals = pd.concat([all_appraisals,appraisal])
+    conn.update(worksheet="Appraisals", data=new_appraisals)
     st.write("Submitted!")
