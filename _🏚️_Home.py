@@ -40,24 +40,24 @@ try:
         price = random.randint(baseprice[0],baseprice[1])
         st.header('${:,.0f}'.format(price))
 
-        with st.form("my_form"):   
-            st.write('Complete this form is you would like to save this appraisal.')
-            address = st.text_input('Address:')
-            quote = st.text_input('Quote: ',placeholder=price)
-            cus_name = st.text_input('Customer Name: ')
-            cus_sid = st.text_input('Customer SID: ')
-            cus_phone = st.text_input('Customer Phone#:')
-            realtor = st.text_input('Realtor:')
-            date = st.date_input('Quoted Date:')
-            submitted = st.form_submit_button("Submit")
+        form = st.form("my_form")
+        st.write('Complete this form is you would like to save this appraisal.')
+        address = form.text_input('Address:')
+        quote = form.text_input('Quote: ',placeholder=price)
+        cus_name = form.text_input('Customer Name: ')
+        cus_sid = form.text_input('Customer SID: ')
+        cus_phone = form.text_input('Customer Phone#:')
+        realtor = form.text_input('Realtor:')
+        date = form.date_input('Quoted Date:')
+        submitted = form.form_submit_button("Submit")
 
-            if submitted:
-                conn.create(worksheet="Test")
-                appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date of appraisal":date})
-                conn.update(worksheet="Appraisals", data=appraisal)
-                st.write("Submitted!")
-                st.stop()
-                sleep(10)
+        if submitted:
+            st.write("Submitted!")
+            conn.create(worksheet="Test")
+            appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date of appraisal":date})
+            sleep(10)
+            conn.update(worksheet="Appraisals", data=appraisal)
+            st.write("Submitted!")
             
                 
 
