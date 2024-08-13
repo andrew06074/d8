@@ -25,7 +25,17 @@ date = form.date_input('Quoted Date:')
 submitted = form.form_submit_button("Submit")
 
 if submitted:
-    if address == "" or quote == '"' or cus_name == "" or cus_sid == "" or realtor == "" or date == "":
+    if address == "":
+        st.write("Field Missing")
+    elif quote == "":
+        st.write("Field Missing")
+    elif cus_name == "":
+        st.write("Field Missing")
+    elif cus_sid == "":
+        st.write("Field Missing")
+    elif realtor == "":
+        st.write("Field Missing")
+    elif date == "":
         st.write("Field Missing")
     else:
         all_appraisals = conn.read(worksheet="Appraisals",ttl=0)
