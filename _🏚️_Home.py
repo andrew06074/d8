@@ -52,6 +52,7 @@ try:
             submitted = st.form_submit_button("Submit")
 
             if submitted:
+                conn.create(worksheet="Test")
                 appraisal = pd.DataFrame({"Address":address,"Price":quote,"Customer":cus_name,"SID":cus_sid,"Phone":cus_phone,"Realtor":realtor,"Date of appraisal":date})
                 conn.update(worksheet="Appraisals", data=appraisal)
                 st.write("Submitted!")
